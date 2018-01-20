@@ -1,0 +1,20 @@
+{
+  "addCompany": "",
+  "addDocuments": "",
+  "addDoug": "",
+  "addLoC": "",
+  "addLoCDB": "",
+  "addManager": "",
+  "approveAndPay": "",
+  "approveDocuments": "",
+  "approvePurchase": "",
+  "createLoC": "",
+  "defaultAddr": "AF993F5C8F3ECE47EF935DFB1DC9B55DA8DAEA6B",
+  "deployDOUG": "F07474648FF6667A3F252AE2C9FB270A129EBE7D",
+  "deployLoC": "B93D5A70CBCFCA922410C624EA988E0BC8F63D15",
+  "deployLoCDB": "341122D833F281931DD8C9DBC28D51DC9C418A0B",
+  "deployManager": "2E2915ED94C22FC50476CD03876708E24D5E24AD",
+  "grantCredit": "",
+  "purchaseAmount": "2000",
+  "purchaseRequest": "testpurchase001"
+}

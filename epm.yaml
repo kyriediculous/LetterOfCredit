@@ -1,0 +1,147 @@
+jobs:
+
+- name: purchaseRequest
+  job:
+    set:
+      val: testpurchase001
+
+- name: purchaseAmount
+  job:
+    set:
+      val: 2000
+
+- name: billOfLading
+  job:
+    set:
+      val: testbillOfLading0001
+
+- name: invoice
+  job:
+    set:
+      val: testinvoice0001;
+
+- name: deployDOUG
+  job:
+    deploy:
+      contract: Doug.sol
+
+- name: addDoug
+  job:
+    call:
+      destination: $deployDOUG
+      function: addContract
+      data:
+        - DOUG
+        - $deployDOUG
+
+- name: deployLoCDB
+  job:
+    deploy:
+      contract: LoCDB.sol
+
+- name: addLoCDB
+  job:
+    call:
+      destination: $deployDOUG
+      function: addContract
+      data:
+        - LoCDB
+        - $deployLoCDB
+
+- name: deployLoC
+  job:
+    deploy:
+      contract: LoC.sol
+
+- name: addLoC
+  job:
+    call:
+      destination: $deployDOUG
+      function: addContract
+      data:
+        - LoC
+        - $deployLoC
+
+- name: deployManager
+  job:
+    deploy:
+      contract: Manager.sol
+
+- name: addManager
+  job:
+    call:
+      destination: $deployDOUG
+      function: addContract
+      data:
+        - manager
+        - $deployManager
+
+- name: addCompany
+  job:
+    call:
+      destination: $deployManager
+      function: addCompany
+      data:
+        - $buyerAddress
+        - $buyerBank
+
+- name: addCompany
+  job:
+    call:
+      destination: $deployManager
+      function: addCompany
+      data:
+        - $sellerAddress
+        - $sellerBank
+
+- name: createLoC
+  job:
+    call:
+      destination: $deployManager
+      function: createLoC
+      data:
+        - $sellerAddress
+        - $purchaseAmount
+        - $purchaseRequest
+
+- name: approvePurchase
+  job:
+    call:
+      destination: $deployManager
+      function: approvePurchase
+      data:
+        - $createLoC
+
+- name: grantCredit
+  job:
+    call:
+      destination: $deployManager
+      function: grantCredit
+      data:
+        - $createLoC
+
+- name: addDocuments
+  job:
+    call:
+      destination: $deployManager
+      function: addDocuments
+      data:
+        - $createLoC
+        - $billOfLading
+        - $invoice
+
+- name: approveDocuments
+  job:
+    call:
+      destination: $deployManager
+      function: approveDocuments
+      data:
+        - $createLoC
+
+- name: approveAndPay
+  job:
+    call:
+      destination: $deployManager
+      function: approveAndPay
+      data:
+        - $createLoC
